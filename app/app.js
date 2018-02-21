@@ -1,4 +1,19 @@
-var myNinjaApp = angular.module('myNinjaApp', []);
+var myNinjaApp = angular.module('myNinjaApp', ['ngRoute']);
+
+myNinjaApp.config(['$routeProvider', function($routerProvider){
+  $routerProvider
+    .when('/home', {
+        templateUrl: 'views/home.html'
+    })
+    .when('/directory', {
+        templateUrl: 'views/directory.html',
+        controller: 'NinjaController'
+    })
+    .otherwise({
+      redirectTo: '/home'
+    });
+
+}]);
 
 myNinjaApp.controller('NinjaController', ['$scope', function($scope){
 
@@ -26,25 +41,29 @@ $scope.addNinja = function(){
         name: "Yoshi",
         belt:"green",
         rate: 50,
-        available:true
+        available:true,
+        thumb: "content/img/yoshi.png"
       },
       {
         name: "Crystal",
         belt:"yellow",
         rate: 10,
-        available:true
+        available:true,
+        thumb: "content/img/crystal.png"
       },
       {
         name: "Ryu",
-        belt:"orrange",
+        belt:"black",
         rate: 30,
-        available:false
+        available:true,
+        thumb: "content/img/ryu.png"
       },
       {
         name: "Shaun",
         belt:"purple",
         rate: 500,
-        available:true
+        available:true,
+        thumb: "content/img/shaun.png"
       }
     ];
 

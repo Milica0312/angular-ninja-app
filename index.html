@@ -4,29 +4,11 @@
     <title>TheNetNinja Angular</title>
     <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
     <script src="app\lib\angular.min.js"></script>
+    <script src="app\lib\angular-route.min.js"></script>
     <script src="app\app.js"></script>
   </head>
   <body>
     <header ng-include="'header.html'"></header>
-    <div class="content">
-      <div ng-controller="NinjaController">
-        <button ng-click="order = 'name'">Order by name</button>
-        <button ng-click="order = 'belt'">Order by belt</button>
-        <input type="text" ng-model="search"  placeholder="Search for a ninja.. "/>
-        <ul>
-          <li ng-repeat="ninja in ninjas | orderBy:order | filter:search" ng-show="ninja.available">
-              <h3>{{ninja.name}} - {{ninja.rate | currency: '£'}}</h3>
-              <div class="remove" ng-click="removeNinja(ninja)">x</div>
-              <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
-          </li>
-        </ul>
-        <form ng-submit="addNinja()">
-              <input type="text" ng-model="newninja.name"  placeholder="name"/>
-              <input type="text" ng-model="newninja.belt"  placeholder="belt"/>
-              <input type="text" ng-model="newninja.rate"  placeholder="rate"/>
-              <input type="submit"  value="Add new ninja"/>
-        </form>
-      </div>
-    </div>
+    <main ng-view></main>
   </body>
 </html>
