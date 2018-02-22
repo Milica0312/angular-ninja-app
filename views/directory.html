@@ -1,11 +1,11 @@
 <div class="content">
-  <div ng-controller="NinjaController">
+
     <button ng-click="order = 'name'">Order by name</button>
     <button ng-click="order = 'belt'">Order by belt</button>
     <input type="text" ng-model="search"  placeholder="Search for a ninja.. "/>
     <ul>
       <li ng-repeat="ninja in ninjas | orderBy:order | filter:search" ng-show="ninja.available">
-      <img ng-src="{{ninja.thumb}}" style="margin:-12px 10px 0 0; float:left; width:50px" ng-show={{ninja.thumb}}  />
+        <img ng-src="{{ninja.thumb}}" style="margin:-12px 10px 0 0; float:left; width:50px"  />
           <h3>{{ninja.name}} - {{ninja.rate | currency: '£'}}</h3>
           <div class="remove" ng-click="removeNinja(ninja)">x</div>
           <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
@@ -17,5 +17,5 @@
           <input type="text" ng-model="newninja.rate"  placeholder="rate"/>
           <input type="submit"  value="Add new ninja"/>
     </form>
-  </div>
+
 </div>

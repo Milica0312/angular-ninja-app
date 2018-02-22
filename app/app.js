@@ -1,9 +1,10 @@
 var myNinjaApp = angular.module('myNinjaApp', ['ngRoute']);
 
-myNinjaApp.config(['$routeProvider', function($routerProvider){
-  $routerProvider
+myNinjaApp.config(['$routeProvider', function($routeProvider){
+  $routeProvider
     .when('/home', {
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/home.html',
+        controller: 'NinjaController'
     })
     .when('/directory', {
         templateUrl: 'views/directory.html',
@@ -15,7 +16,21 @@ myNinjaApp.config(['$routeProvider', function($routerProvider){
 
 }]);
 
-myNinjaApp.controller('NinjaController', ['$scope', function($scope){
+myNinjaApp.directive('randomNinja', [function(){
+  return {
+    restrict: 'E',
+    scope: {
+        ninjas: '=',
+        title: '='
+    },
+    templateUrl: 'views/random.html',
+    controller: function($scope){
+        $scope.random = Math.floor(Math.random()*4);
+    }
+  };
+}]);
+
+myNinjaApp.controller('NinjaController', ['$scope', '$http', function($scope, $http){
 
   $scope.removeNinja = function(ninja){
     var removedNinja = $scope.ninjas.indexOf(ninja);
@@ -36,7 +51,7 @@ $scope.addNinja = function(){
 
 };
 
-  $scope.ninjas = [
+/*  $scope.ninjas = [
       {
         name: "Yoshi",
         belt:"green",
@@ -66,5 +81,10 @@ $scope.addNinja = function(){
         thumb: "content/img/shaun.png"
       }
     ];
+
+    console.log(angular.toJson($scope.ninjas));*/
+    $http.get('data/ninjas.json').then(function(response){
+        $scope.ninjas = response.data;
+    });
 
 }]);
